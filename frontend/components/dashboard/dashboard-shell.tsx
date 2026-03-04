@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { UserNav } from "./user-nav";
 
 const links = [
   ["Overview", "/dashboard"],
@@ -27,7 +28,10 @@ export function DashboardShell({ children }: { children: ReactNode }) {
             <span className="inline-block h-6 w-6 rotate-3 rounded-[4px] bg-primary" />
             GLOWTIPS
           </Link>
-          <ThemeToggle />
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+            <UserNav />
+          </div>
         </div>
       </header>
 

@@ -30,10 +30,12 @@ export default function LoginPage() {
         method: "POST",
         body: payload
       }),
-    onSuccess: (data) => {
+    onSuccess: (data, variables) => {
       localStorage.setItem("glowtips_access", data.accessToken);
       localStorage.setItem("glowtips_refresh", data.refreshToken);
       localStorage.setItem("glowtips_creator", data.user.creatorId ?? "");
+      localStorage.setItem("glowtips_email", variables.email);
+      localStorage.setItem("glowtips_name", (data.user as any).displayName ?? variables.email.split("@")[0]);
       toast.success("Welcome back");
       router.push("/dashboard");
     },
