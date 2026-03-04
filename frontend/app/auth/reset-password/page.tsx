@@ -49,7 +49,7 @@ function ResetPasswordForm() {
   });
 
   return (
-    <Card className="w-full rounded-[8px] border-black/10 p-6">
+    <Card className="w-full rounded-[4px] border-border p-6">
       <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">Secure Access</p>
       <h1 className="mt-2 text-3xl font-black tracking-tight">Reset Password</h1>
       <form className="mt-6 space-y-4" onSubmit={form.handleSubmit((values) => mutation.mutate(values))}>
@@ -60,7 +60,7 @@ function ResetPasswordForm() {
         </Button>
       </form>
       {!token && <p className="mt-4 text-sm text-red-500">Reset token missing or invalid.</p>}
-      <p className="mt-4 text-sm text-muted-foreground">
+      <p className="mt-4 text-sm ">
         Back to{" "}
         <Link className="font-medium text-primary underline-offset-4 hover:underline" href="/auth/login">
           Sign in

@@ -12,7 +12,7 @@ export function MarketingHero() {
           <h1 className="max-w-3xl text-4xl font-extrabold leading-tight md:text-5xl">
             Premium tipping, wallet clarity, and calmer alerts for serious creators.
           </h1>
-          <p className="mt-4 max-w-2xl text-muted-foreground">
+          <p className="mt-4 max-w-2xl ">
             GlowTips gives your community a trustworthy way to support your work with transparent fees, instant overlays, and stable payouts.
           </p>
         </Card>
@@ -20,3 +20,4 @@ export function MarketingHero() {
     </section>
   );
 }
+

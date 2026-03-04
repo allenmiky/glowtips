@@ -34,7 +34,7 @@ export default function WalletPage() {
         {query.data && (
           <>
             <p className="mt-4 text-3xl font-extrabold">${query.data.balance.toFixed(2)}</p>
-            <p className="mt-1 text-sm text-muted-foreground">
+            <p className="mt-1 text-sm ">
               Gross ${query.data.feeBreakdown.gross.toFixed(2)} | Fee ${(query.data.feeBreakdown.platformFeeRate * 100).toFixed(0)}% = ${query.data.feeBreakdown.platformFee.toFixed(2)} | Net ${query.data.feeBreakdown.net.toFixed(2)}
             </p>
             <div className="mt-6 h-56">

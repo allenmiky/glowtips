@@ -5,10 +5,11 @@ export function Input({ className, ...props }: InputHTMLAttributes<HTMLInputElem
   return (
     <input
       className={cn(
-        "h-11 w-full rounded-xl border border-border bg-card px-3 text-sm outline-none transition duration-200 focus:border-accent",
+        "h-11 w-full rounded-[4px] border border-border bg-card px-3 text-sm outline-none transition duration-200 focus:border-accent",
         className
       )}
       {...props}
     />
   );
 }
+

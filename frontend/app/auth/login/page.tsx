@@ -48,7 +48,7 @@ export default function LoginPage() {
     <main className="mx-auto grid min-h-screen max-w-6xl items-center gap-6 px-4 py-10 lg:grid-cols-[1.05fr_1fr]">
       <AuthBrand title="Welcome Back" subtitle="Sign in and continue managing your creator dashboard, alerts, and payouts." />
 
-      <Card className="w-full rounded-[8px] border-black/10">
+      <Card className="w-full rounded-[4px] border-black/10">
         <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">Account Access</p>
         <h1 className="mt-2 text-3xl font-black tracking-tight">Login</h1>
         <form className="mt-6 space-y-4" onSubmit={form.handleSubmit((values) => mutation.mutate(values))}>
@@ -58,7 +58,7 @@ export default function LoginPage() {
             {mutation.isPending ? "Signing in..." : "Sign in"}
           </Button>
         </form>
-        <div className="mt-4 flex items-center justify-between text-sm text-muted-foreground">
+        <div className="mt-4 flex items-center justify-between text-sm ">
           <Link className="font-medium text-primary underline-offset-4 hover:underline" href="/auth/forgot-password">
             Forgot password?
           </Link>
@@ -73,3 +73,4 @@ export default function LoginPage() {
     </main>
   );
 }
+

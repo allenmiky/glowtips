@@ -18,13 +18,13 @@ export function MarketingNav() {
         </Link>
         <nav className="hidden gap-6 md:flex">
           {links.map(([label, href]) => (
-            <Link key={href} href={href} className="text-sm text-muted-foreground transition hover:text-foreground">
+            <Link key={href} href={href} className="text-sm  transition hover:text-foreground">
               {label}
             </Link>
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <Link href="/auth/login" className="text-sm text-muted-foreground hover:text-foreground">
+          <Link href="/auth/login" className="text-sm  hover:text-foreground">
             Login
           </Link>
           <ThemeToggle />

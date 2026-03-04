@@ -55,8 +55,8 @@ export default function WithdrawPage() {
           {(historyQuery.data ?? []).map((item) => (
             <div key={item.id} className="rounded-xl border border-border p-3 text-sm">
               <p className="font-semibold">${item.amount.toFixed(2)} - {item.status}</p>
-              <p className="text-muted-foreground">Requested: {new Date(item.requestedAt).toLocaleString()}</p>
-              <p className="text-muted-foreground">Processed: {item.processedAt ? new Date(item.processedAt).toLocaleString() : "Pending"}</p>
+              <p className="">Requested: {new Date(item.requestedAt).toLocaleString()}</p>
+              <p className="">Processed: {item.processedAt ? new Date(item.processedAt).toLocaleString() : "Pending"}</p>
             </div>
           ))}
         </div>

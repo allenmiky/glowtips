@@ -44,7 +44,7 @@ export default function ForgotPasswordPage() {
             {mutation.isPending ? "Sending..." : "Send reset link"}
           </Button>
         </form>
-        <p className="mt-4 text-sm text-muted-foreground">
+        <p className="mt-4 text-sm ">
           Back to{" "}
           <Link className="font-medium text-primary underline-offset-4 hover:underline" href="/auth/login">
             Sign in
@@ -54,3 +54,4 @@ export default function ForgotPasswordPage() {
     </main>
   );
 }
+

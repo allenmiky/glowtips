@@ -16,11 +16,11 @@
   --primary: 17 95% 58%;     /* Changed from blue to orange (same as accent) */
   
   /* UI Elements */
-  --radius-xs: 3px;
-  --radius-sm: 3px;
-  --radius-md: 3px;
-  --radius-lg: 3px;
-  --radius-xl: 3px;
+  --radius-xs: 4px;
+  --radius-sm: 4px;
+  --radius-md: 4px;
+  --radius-lg: 4px;
+  --radius-xl: 4px;
   
   /* Shadows - minimal */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.02);
@@ -41,11 +41,11 @@
 
 .dark {
   --background: 222 31% 10%;
-  --foreground: 40 20% 94%;
+  --foreground: 0 0% 100%;
   --card: 222 24% 14%;
-  --card-foreground: 40 20% 94%;
+  --card-foreground: 0 0% 100%;
   --muted: 221 18% 21%;
-  --muted-foreground: 31 18% 73%;
+  --muted-foreground: 0 0% 100%;
   --border: 223 18% 29%;
   --accent: 19 91% 60%;
   --primary: 19 91% 60%;     /* Changed to orange */
@@ -102,7 +102,7 @@ html {
 
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--border));
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -115,7 +115,7 @@ html {
 @layer components {
   /* Buttons - all orange now */
   .btn-base {
-    @apply inline-flex items-center justify-center rounded-[3px] px-4 py-2 text-sm font-medium transition-colors;
+    @apply inline-flex items-center justify-center rounded-[4px] px-4 py-2 text-sm font-medium transition-colors;
     transition-duration: var(--transition-fast);
   }
   
@@ -137,7 +137,7 @@ html {
   
   /* Cards */
   .card-base {
-    @apply rounded-[3px] border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-4;
+    @apply rounded-[4px] border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-4;
   }
   
   .card-hover {
@@ -146,7 +146,7 @@ html {
   
   /* Inputs */
   .input-base {
-    @apply w-full rounded-[3px] border border-[hsl(var(--border))] bg-[hsl(var(--card))] px-3 py-2 text-sm text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] transition-colors;
+    @apply w-full rounded-[4px] border border-[hsl(var(--border))] bg-[hsl(var(--card))] px-3 py-2 text-sm text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] transition-colors;
   }
   
   .input-base:focus {
@@ -172,7 +172,7 @@ html {
   
   /* Badges */
   .badge {
-    @apply inline-flex items-center rounded-[3px] px-2 py-0.5 text-xs font-medium;
+    @apply inline-flex items-center rounded-[4px] px-2 py-0.5 text-xs font-medium;
   }
   
   .badge-success {
@@ -203,7 +203,7 @@ html {
   
   /* Auth pages specific */
   .auth-card {
-    @apply w-full rounded-[3px] border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-6 shadow-none;
+    @apply w-full rounded-[4px] border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-6 shadow-none;
   }
   
   .auth-title {
@@ -215,7 +215,7 @@ html {
   }
   
   .auth-input {
-    @apply w-full rounded-[3px] border border-[hsl(var(--border))] bg-[hsl(var(--card))] px-3 py-2 text-sm text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] transition-colors;
+    @apply w-full rounded-[4px] border border-[hsl(var(--border))] bg-[hsl(var(--card))] px-3 py-2 text-sm text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] transition-colors;
   }
   
   .auth-input:focus {

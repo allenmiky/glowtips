@@ -10,7 +10,7 @@ export default function ProfilePage() {
       <div className="space-y-6">
         <div>
           <h1 className="text-3xl font-black tracking-tight">Public Profile</h1>
-          <p className="text-muted-foreground">Manage your public presence and branding.</p>
+          <p className="">Manage your public presence and branding.</p>
         </div>
 
         <Card className="p-6">
@@ -20,15 +20,16 @@ export default function ProfilePage() {
             </div>
             <div>
               <h2 className="text-xl font-bold">{name}</h2>
-              <p className="text-sm text-muted-foreground">{email}</p>
+              <p className="text-sm ">{email}</p>
             </div>
           </div>
           
           <div className="mt-8 grid gap-4 max-w-md">
-             <p className="text-sm text-muted-foreground italic">Profile editing coming soon...</p>
+             <p className="text-sm  italic">Profile editing coming soon...</p>
           </div>
         </Card>
       </div>
     </DashboardShell>
   );
 }
+

@@ -40,7 +40,7 @@ export default function IntegrationsPage() {
     <DashboardShell>
       <Card>
         <h1 className="text-2xl font-bold">Integrations</h1>
-        <p className="mt-2 text-sm text-muted-foreground">Use this URL as an OBS Browser Source.</p>
+        <p className="mt-2 text-sm ">Use this URL as an OBS Browser Source.</p>
 
         <div className="mt-5 flex gap-2">
           <Input readOnly value={obsOverlayUrl} placeholder="OBS overlay URL will appear here" />
@@ -49,7 +49,7 @@ export default function IntegrationsPage() {
           </Button>
         </div>
 
-        <div className="mt-6 space-y-3 text-sm text-muted-foreground">
+        <div className="mt-6 space-y-3 text-sm ">
           <p>API endpoint: {config.apiUrl}</p>
           <p>Socket endpoint: {config.wsUrl}</p>
         </div>
@@ -57,3 +57,4 @@ export default function IntegrationsPage() {
     </DashboardShell>
   );
 }
+

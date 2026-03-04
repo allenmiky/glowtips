@@ -30,19 +30,19 @@ export function UserNav() {
         <div className="absolute right-0 mt-2 w-56 origin-top-right rounded-[4px] border border-black/10 bg-card p-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-[100]">
           <div className="px-3 py-2 border-b border-black/5">
             <p className="text-xs font-bold text-foreground truncate">{name}</p>
-            <p className="text-[10px] text-muted-foreground truncate">{email}</p>
+            <p className="text-[10px]  truncate">{email}</p>
           </div>
           <div className="py-1">
             <Link
               href="/dashboard/settings"
-              className="group flex w-full items-center rounded-[2px] px-3 py-2 text-[11px] font-bold uppercase tracking-[0.1em] text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+              className="group flex w-full items-center rounded-[2px] px-3 py-2 text-[11px] font-bold uppercase tracking-[0.1em]  hover:bg-primary/10 hover:text-primary transition-colors"
               onClick={() => setIsOpen(false)}
             >
               Settings
             </Link>
             <Link
               href="/profile"
-              className="group flex w-full items-center rounded-[2px] px-3 py-2 text-[11px] font-bold uppercase tracking-[0.1em] text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+              className="group flex w-full items-center rounded-[2px] px-3 py-2 text-[11px] font-bold uppercase tracking-[0.1em]  hover:bg-primary/10 hover:text-primary transition-colors"
               onClick={() => setIsOpen(false)}
             >
               Public Profile
@@ -64,3 +64,4 @@ export function UserNav() {
     </div>
   );
 }
+

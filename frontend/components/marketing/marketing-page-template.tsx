@@ -6,7 +6,7 @@ export function MarketingPageTemplate({ title, description }: { title: string; d
       <MarketingNav />
       <section className="mx-auto max-w-4xl px-4 py-16">
         <h1 className="text-4xl font-extrabold">{title}</h1>
-        <p className="mt-4 text-lg text-muted-foreground">{description}</p>
+        <p className="mt-4 text-lg ">{description}</p>
       </section>
     </main>
   );

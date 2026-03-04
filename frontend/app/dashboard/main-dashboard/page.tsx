@@ -23,24 +23,24 @@ export default function MainDashboardPage() {
       <Card className="rounded-[4px] border-black/10">
         <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary">Creator Room</p>
         <h1 className="mt-2 text-4xl font-extrabold tracking-tight">Main Dashboard</h1>
-        <p className="mt-3 text-sm text-muted-foreground">Overview alag tab me hai. Yahan live creator controls and signals hain.</p>
+        <p className="mt-3 text-sm ">Overview alag tab me hai. Yahan live creator controls and signals hain.</p>
       </Card>
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <Card className="rounded-[4px] border-black/10">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Today Tips</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] ">Today Tips</p>
           <p className="mt-2 text-3xl font-extrabold">$55</p>
         </Card>
         <Card className="rounded-[4px] border-black/10">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Supporters</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] ">Supporters</p>
           <p className="mt-2 text-3xl font-extrabold">9</p>
         </Card>
         <Card className="rounded-[4px] border-black/10">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Avg Tip</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] ">Avg Tip</p>
           <p className="mt-2 text-3xl font-extrabold">$6.11</p>
         </Card>
         <Card className="rounded-[4px] border-black/10">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Pending Withdraw</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] ">Pending Withdraw</p>
           <p className="mt-2 text-3xl font-extrabold">$0</p>
         </Card>
       </div>
@@ -48,7 +48,7 @@ export default function MainDashboardPage() {
       <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
         <Card className="rounded-[4px] border-black/10">
           <h2 className="text-xl font-extrabold tracking-tight">Goal Setter</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Set stream goal and keep audience updated live.</p>
+          <p className="mt-1 text-sm ">Set stream goal and keep audience updated live.</p>
           <div className="mt-4 flex gap-2">
             <Input type="number" min={1} value={goal} onChange={(e) => setGoal(Number(e.target.value) || 1)} />
             <Button type="button" className="rounded-[4px] px-5">
@@ -72,8 +72,8 @@ export default function MainDashboardPage() {
                   <p className="text-sm font-bold">{tip.name}</p>
                   <p className="text-sm font-extrabold text-primary">${tip.amount}</p>
                 </div>
-                <p className="mt-1 text-sm text-muted-foreground">{tip.message}</p>
-                <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.12em] text-muted-foreground">{tip.time}</p>
+                <p className="mt-1 text-sm ">{tip.message}</p>
+                <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.12em] ">{tip.time}</p>
               </div>
             ))}
           </div>
@@ -82,3 +82,4 @@ export default function MainDashboardPage() {
     </DashboardShell>
   );
 }
+

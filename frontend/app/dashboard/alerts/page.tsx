@@ -30,7 +30,7 @@ export default function AlertsPage() {
     <DashboardShell>
       <Card>
         <h1 className="text-2xl font-bold">Alerts</h1>
-        <p className="mt-2 text-muted-foreground">Send a test event to verify your OBS overlay.</p>
+        <p className="mt-2 ">Send a test event to verify your OBS overlay.</p>
         <Button className="mt-5" onClick={() => mutation.mutate()}>
           Send test alert
         </Button>
@@ -38,3 +38,4 @@ export default function AlertsPage() {
     </DashboardShell>
   );
 }
+
