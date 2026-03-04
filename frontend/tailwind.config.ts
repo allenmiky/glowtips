@@ -6,7 +6,10 @@ const config: Config = {
   theme: {
     extend: {
       borderRadius: {
-        xl: "20px"
+        xl: "var(--radius)",
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)"
       },
       colors: {
         background: "hsl(var(--background))",
@@ -18,9 +21,6 @@ const config: Config = {
         border: "hsl(var(--border))",
         accent: "hsl(var(--accent))",
         primary: "hsl(var(--primary))"
-      },
-      boxShadow: {
-        glow: "0 0 24px -8px rgba(7, 214, 189, 0.55)"
       },
       fontFamily: {
         sans: ["Manrope", "ui-sans-serif", "system-ui"]
