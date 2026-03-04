@@ -26,7 +26,22 @@ const webhookSchema = z.object({
   providerRef: z.string().min(4)
 });
 
+import { requireAuth, requireRole, AuthenticatedRequest } from "../../common/middleware/auth.js";
+
 export const tipsRouter = Router();
+
+tipsRouter.get("/me", requireAuth, requireRole("creator"), async (req: AuthenticatedRequest, res, next) => {
+  try {
+    const tips = await prisma.tip.findMany({
+      where: { creatorId: req.auth!.creatorId! },
+      orderBy: { createdAt: "desc" },
+      take: 50
+    });
+    ok(res, tips);
+  } catch (error) {
+    next(error);
+  }
+});
 
 async function confirmTip(tipId: string, providerRef: string): Promise<{ tipId: string; alreadyConfirmed: boolean }> {
   const tip = await prisma.tip.findUnique({ where: { id: tipId } });

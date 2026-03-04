@@ -13,10 +13,21 @@ const testAlertSchema = z.object({
 });
 
 const updateAlertSettingsSchema = z.object({
-  layout: z.string().min(3).max(40),
-  soundEnabled: z.boolean(),
-  durationMs: z.number().int().min(1000).max(15000),
-  volume: z.number().int().min(0).max(100)
+  layout: z.string().min(3).max(40).optional(),
+  soundEnabled: z.boolean().optional(),
+  durationMs: z.number().int().min(1000).max(30000).optional(),
+  volume: z.number().int().min(0).max(100).optional(),
+  imageLayout: z.string().optional(),
+  animation: z.string().optional(),
+  fontStyle: z.string().optional(),
+  messageTTS: z.boolean().optional(),
+  nameAmountTTS: z.boolean().optional(),
+  minAmount: z.number().min(0).optional(),
+  maxMessageLength: z.number().int().min(1).max(500).optional(),
+  filterProfanity: z.boolean().optional(),
+  priorityLevel: z.number().int().min(1).max(10).optional(),
+  soundUrl: z.string().url().optional().nullable(),
+  imageUrl: z.string().url().optional().nullable()
 });
 
 export const alertsRouter = Router();

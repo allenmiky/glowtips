@@ -108,10 +108,21 @@ model Withdrawal {
 }
 
 model AlertSetting {
-  creatorId    String  @id
-  layout       String
-  soundEnabled Boolean @default(true)
-  durationMs   Int     @default(4000)
-  volume       Int     @default(80)
-  creator      Creator @relation(fields: [creatorId], references: [id])
+  creatorId         String   @id
+  layout            String   @default("image-above")
+  soundEnabled      Boolean  @default(true)
+  durationMs        Int      @default(4000)
+  volume            Int      @default(80)
+  imageLayout       String   @default("image-above")
+  animation         String   @default("fade-in")
+  fontStyle         String   @default("modern")
+  messageTTS        Boolean  @default(false)
+  nameAmountTTS     Boolean  @default(false)
+  minAmount         Decimal  @default(0) @db.Decimal(12, 2)
+  maxMessageLength  Int      @default(255)
+  filterProfanity   Boolean  @default(true)
+  priorityLevel     Int      @default(1)
+  soundUrl          String?
+  imageUrl          String?
+  creator           Creator  @relation(fields: [creatorId], references: [id])
 }

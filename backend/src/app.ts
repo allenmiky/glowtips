@@ -12,6 +12,7 @@ import { tipsRouter } from "./modules/tips/tips.routes.js";
 import { walletRouter } from "./modules/wallet/wallet.routes.js";
 import { withdrawalsRouter } from "./modules/withdrawals/withdrawals.routes.js";
 import { alertsRouter } from "./modules/alerts/alerts.routes.js";
+import { audioRouter } from "./modules/audio/audio.routes.js";
 import { adminRouter } from "./modules/admin/admin.routes.js";
 import { swaggerSpec } from "./docs/swagger.js";
 
@@ -41,6 +42,7 @@ export function createApp() {
   app.use("/api/v1/wallet", walletRouter);
   app.use("/api/v1/withdrawals", withdrawalsRouter);
   app.use("/api/v1/alerts", alertsRouter);
+  app.use("/api/v1/audio", audioRouter);
   app.use("/api/v1/admin", adminRouter);
 
   app.use(errorHandler);
