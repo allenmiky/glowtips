@@ -29,7 +29,7 @@ type ResetValues = z.infer<typeof resetSchema>;
 // --- 1. Form Component (Jahan useSearchParams use ho raha hai) ---
 function ResetPasswordForm() {
   const searchParams = useSearchParams();
-  const token = searchParams.get("token") ?? "";
+  const token = searchParams?.get("token") ?? "";
   const form = useForm<ResetValues>({ resolver: zodResolver(resetSchema) });
 
   const mutation = useMutation({

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -98,15 +98,17 @@ export default function TipPageSettings() {
   const creatorQuery = useQuery({
     queryKey: ["creator", "me"],
     queryFn: () => apiRequest<CreatorProfile>("/api/v1/creators/me", { token }),
-    enabled: Boolean(token),
-    onSuccess: (data) => {
-      brandingForm.reset({
-        displayName: data.displayName || "",
-        avatarUrl: data.avatarUrl || "",
-        goalAmount: Number(data.goalAmount) || 100
-      });
-    }
+    enabled: Boolean(token)
   });
+
+  useEffect(() => {
+    if (!creatorQuery.data) return;
+    brandingForm.reset({
+      displayName: creatorQuery.data.displayName || "",
+      avatarUrl: creatorQuery.data.avatarUrl || "",
+      goalAmount: Number(creatorQuery.data.goalAmount) || 100
+    });
+  }, [creatorQuery.data, brandingForm]);
 
   const alertsQuery = useQuery({
     queryKey: ["alerts", "settings"],
@@ -130,9 +132,9 @@ export default function TipPageSettings() {
       }),
     onSuccess: () => {
       toast.success("Branding updated");
-      queryClient.invalidateQueries(["creator", "me"]);
+      queryClient.invalidateQueries({ queryKey: ["creator", "me"] });
     },
-    error: (err: any) => toast.error(err.message)
+    onError: (err: any) => toast.error(err.message)
   });
 
   const alertsMutation = useMutation({
@@ -144,9 +146,9 @@ export default function TipPageSettings() {
       }),
     onSuccess: () => {
       toast.success("Alert settings saved");
-      queryClient.invalidateQueries(["alerts", "settings"]);
+      queryClient.invalidateQueries({ queryKey: ["alerts", "settings"] });
     },
-    error: (err: any) => toast.error(err.message)
+    onError: (err: any) => toast.error(err.message)
   });
 
   const copyLink = async (value: string, label: string) => {
@@ -240,8 +242,8 @@ export default function TipPageSettings() {
                     <Input className="mt-1" type="number" {...brandingForm.register("goalAmount")} />
                   </div>
                 </div>
-                <Button type="submit" disabled={brandingMutation.isLoading}>
-                  {brandingMutation.isLoading ? "Saving..." : "Save Branding"}
+                <Button type="submit" disabled={brandingMutation.isPending}>
+                  {brandingMutation.isPending ? "Saving..." : "Save Branding"}
                 </Button>
               </form>
             </Card>
@@ -268,10 +270,10 @@ export default function TipPageSettings() {
                 <div className="mt-4 space-y-3">
                   <Input readOnly value={overlayLink} className="bg-muted/30 text-xs font-mono" />
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="flex-1 text-[10px] font-bold uppercase tracking-tighter" onClick={() => copyLink(overlayLink, "Overlay link")}>
+                    <Button variant="outline" className="flex-1 text-[10px] font-bold uppercase tracking-tighter" onClick={() => copyLink(overlayLink, "Overlay link")}>
                       <Copy className="mr-2 h-3 w-3" /> Copy
                     </Button>
-                    <Button variant="outline" size="sm" className="flex-1 text-[10px] font-bold uppercase tracking-tighter" onClick={() => window.open(overlayLink, "_blank")}>
+                    <Button variant="outline" className="flex-1 text-[10px] font-bold uppercase tracking-tighter" onClick={() => window.open(overlayLink, "_blank")}>
                       <ExternalLink className="mr-2 h-3 w-3" /> Open Link
                     </Button>
                   </div>
@@ -283,7 +285,7 @@ export default function TipPageSettings() {
                 <div className="mt-4 space-y-3">
                   <Input readOnly value={fallbackLink} className="bg-muted/30 text-xs font-mono" />
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="flex-1 text-[10px] font-bold uppercase tracking-tighter" onClick={() => copyLink(fallbackLink, "Fallback link")}>
+                    <Button variant="outline" className="flex-1 text-[10px] font-bold uppercase tracking-tighter" onClick={() => copyLink(fallbackLink, "Fallback link")}>
                       <Copy className="mr-2 h-3 w-3" /> Copy
                     </Button>
                   </div>
@@ -303,8 +305,8 @@ export default function TipPageSettings() {
                       <p className="text-[9px] text-muted-foreground leading-tight mt-1">SUPPORTNAME sent $12.00 MESSAGEHERE</p>
                     </div>
                     <div className="absolute bottom-2 right-2 flex gap-1">
-                      <Button variant="outline" size="sm" className="h-7 text-[9px] uppercase font-bold">Edit Image</Button>
-                      <Button variant="outline" size="sm" className="h-7 text-[9px] uppercase font-bold">Test Alert</Button>
+                      <Button variant="outline" className="h-7 text-[9px] uppercase font-bold">Edit Image</Button>
+                      <Button variant="outline" className="h-7 text-[9px] uppercase font-bold">Test Alert</Button>
                     </div>
                   </div>
 
@@ -356,7 +358,7 @@ export default function TipPageSettings() {
                       <div className="absolute left-0 top-0 h-full w-2/3 bg-primary" />
                     </div>
                     <span className="text-[10px] font-mono text-muted-foreground">0:01 / 0:23</span>
-                    <Button variant="outline" size="sm" className="h-7 text-[9px] uppercase font-bold px-2">Upload Sound</Button>
+                    <Button variant="outline" className="h-7 text-[9px] uppercase font-bold px-2">Upload Sound</Button>
                   </div>
 
                   <div className="space-y-4">
@@ -425,8 +427,8 @@ export default function TipPageSettings() {
                       </select>
                     </div>
                     <div className="flex gap-2 justify-end">
-                      <Button variant="outline" size="sm" className="bg-primary text-white hover:bg-primary/90 border-none text-[10px] font-bold uppercase h-8 px-4">Test Audio</Button>
-                      <Button variant="outline" size="sm" className="bg-primary text-white hover:bg-primary/90 border-none text-[10px] font-bold uppercase h-8 px-4">Set to Default</Button>
+                      <Button variant="outline" className="bg-primary text-white hover:bg-primary/90 border-none text-[10px] font-bold uppercase h-8 px-4">Test Audio</Button>
+                      <Button variant="outline" className="bg-primary text-white hover:bg-primary/90 border-none text-[10px] font-bold uppercase h-8 px-4">Set to Default</Button>
                     </div>
                   </div>
 
@@ -445,7 +447,7 @@ export default function TipPageSettings() {
 
                   {/* Player & Upload */}
                   <div className="p-4 rounded-[4px] border border-border bg-muted/5 space-y-4 flex flex-col items-center">
-                    <Button variant="outline" size="sm" className="text-[10px] font-bold uppercase border-border hover:bg-muted h-8">
+                    <Button variant="outline" className="text-[10px] font-bold uppercase border-border hover:bg-muted h-8">
                       <Mic className="mr-2 h-3 w-3" /> Upload Alert Sound
                     </Button>
                     <div className="w-full bg-white rounded-full p-1 shadow-sm mt-4">
@@ -546,4 +548,3 @@ export default function TipPageSettings() {
     </DashboardShell>
   );
 }
-
