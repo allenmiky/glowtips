@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    typedRoutes: true
-  }
+  typedRoutes: true  // ✅ experimental se bahar nikal diya
 };
 
 export default nextConfig;
