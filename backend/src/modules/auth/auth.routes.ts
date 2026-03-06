@@ -7,6 +7,7 @@ import { prisma } from "../../config/prisma.js";
 import { validate } from "../../common/middleware/validate.js";
 import { ok } from "../../common/utils/response.js";
 import { AppError } from "../../common/middleware/error-handler.js";
+import type { AuthTokenPayload } from "./jwt.js";
 import { signAccessToken, signRefreshToken, verifyRefreshToken } from "./jwt.js";
 import { env } from "../../config/env.js";
 import { mailer, mailFrom } from "../../config/mailer.js";
@@ -103,9 +104,10 @@ authRouter.post("/login", validate(loginSchema), async (req, res, next) => {
       throw new AppError("Invalid credentials", 401);
     }
 
-    const payload = {
+    const role: AuthTokenPayload["role"] = user.role === "ADMIN" ? "admin" : "creator";
+    const payload: AuthTokenPayload = {
       sub: user.id,
-      role: user.role === "ADMIN" ? "admin" : "creator" as const,
+      role,
       creatorId: user.creator?.id
     };
 

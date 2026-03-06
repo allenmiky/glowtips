@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { LedgerEntry, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { AuthenticatedRequest, requireAuth, requireRole } from "../../common/middleware/auth.js";
 import { prisma } from "../../config/prisma.js";
@@ -21,7 +21,7 @@ withdrawalsRouter.post("/", requireAuth, requireRole("creator"), validate(reques
   try {
     const creatorId = req.auth!.creatorId!;
     const entries = await prisma.ledgerEntry.findMany({ where: { creatorId } });
-    const balance = entries.reduce((acc: number, entry: LedgerEntry) => {
+    const balance = entries.reduce((acc: number, entry: (typeof entries)[number]) => {
       const amount = Number(entry.amount);
       return entry.type === "CREDIT" ? acc + amount : acc - amount;
     }, 0);
@@ -71,11 +71,13 @@ withdrawalsRouter.get("/", requireAuth, requireRole("creator"), async (req: Auth
 
 withdrawalsRouter.patch("/:id/status", requireAuth, requireRole("admin"), validate(updateWithdrawalSchema), async (req, res, next) => {
   try {
+    const status = req.body.status as "APPROVED" | "REJECTED" | "PAID";
+    const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
     const updated = await prisma.withdrawal.update({
-      where: { id: req.params.id },
+      where: { id },
       data: {
-        status: req.body.status,
-        processedAt: req.body.status === "PAID" ? new Date() : null
+        status,
+        processedAt: status === "PAID" ? new Date() : null
       }
     });
     ok(res, updated);

@@ -53,7 +53,11 @@ audioRouter.post("/", requireAuth, requireRole("creator"), validate(audioFileSch
 audioRouter.put("/:id", requireAuth, requireRole("creator"), validate(audioFileSchema.partial()), async (req: AuthenticatedRequest, res, next) => {
   try {
     const creatorId = req.auth!.creatorId!;
-    const { id } = req.params;
+    const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+    const existing = await prisma.audioFile.findFirst({ where: { id, creatorId } });
+    if (!existing) {
+      return ok(res, { message: "Audio file not found" });
+    }
 
     if (req.body.isDefault) {
       await prisma.audioFile.updateMany({
@@ -63,7 +67,7 @@ audioRouter.put("/:id", requireAuth, requireRole("creator"), validate(audioFileS
     }
 
     const updated = await prisma.audioFile.update({
-      where: { id, creatorId },
+      where: { id },
       data: req.body
     });
     ok(res, updated);
@@ -74,8 +78,14 @@ audioRouter.put("/:id", requireAuth, requireRole("creator"), validate(audioFileS
 
 audioRouter.delete("/:id", requireAuth, requireRole("creator"), async (req: AuthenticatedRequest, res, next) => {
   try {
+    const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+    const creatorId = req.auth!.creatorId!;
+    const existing = await prisma.audioFile.findFirst({ where: { id, creatorId } });
+    if (!existing) {
+      return ok(res, { deleted: false });
+    }
     await prisma.audioFile.delete({
-      where: { id: req.params.id, creatorId: req.auth!.creatorId! }
+      where: { id }
     });
     ok(res, { deleted: true });
   } catch (error) {

@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { LedgerEntry, Tip } from "@prisma/client";
 import { prisma } from "../../config/prisma.js";
 import { AuthenticatedRequest, requireAuth, requireRole } from "../../common/middleware/auth.js";
 import { ok } from "../../common/utils/response.js";
@@ -15,13 +14,13 @@ walletRouter.get("/", requireAuth, requireRole("creator"), async (req: Authentic
       prisma.tip.findMany({ where: { creatorId, status: "CONFIRMED" }, orderBy: { createdAt: "desc" }, take: 20 })
     ]);
 
-    const balance = entries.reduce((acc: number, entry: LedgerEntry) => {
+    const balance = entries.reduce((acc: number, entry: (typeof entries)[number]) => {
       const amount = Number(entry.amount);
       return entry.type === "CREDIT" ? acc + amount : acc - amount;
     }, 0);
 
     const feeRate = 0.05;
-    const gross = tips.reduce((sum: number, tip: Tip) => sum + Number(tip.amount), 0);
+    const gross = tips.reduce((sum: number, tip: (typeof tips)[number]) => sum + Number(tip.amount), 0);
     const fee = gross * feeRate;
     const net = gross - fee;
 
