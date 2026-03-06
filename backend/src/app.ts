@@ -45,6 +45,10 @@ export function createApp() {
   app.use("/api/v1/audio", audioRouter);
   app.use("/api/v1/admin", adminRouter);
 
+
+  app.get("/", (req, res) => {
+  res.status(200).send("GlowTips backend is running");
+});
   app.use(errorHandler);
 
   return app;
