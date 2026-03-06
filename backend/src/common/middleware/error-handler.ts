@@ -23,6 +23,10 @@ export function errorHandler(error: Error, _req: Request, res: Response, _next: 
     return;
   }
 
+  // Keep unknown errors visible in deployment logs for faster diagnosis.
+  // eslint-disable-next-line no-console
+  console.error(error);
+
   res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
     error: {
       message: "Internal server error"

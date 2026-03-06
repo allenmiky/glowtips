@@ -47,8 +47,8 @@ export function createApp() {
 
 
   app.get("/", (req, res) => {
-  res.status(200).send("GlowTips backend is running");
-});
+  res.status(200).send("GlowTips backend is running");});
+  
   app.use(errorHandler);
 
   return app;
