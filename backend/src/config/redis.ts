@@ -1,7 +1,9 @@
-import { Redis } from "ioredis";
-import { env } from "./env.js";
+type RedisStub = {
+  connect: () => Promise<void>;
+  quit: () => Promise<void>;
+};
 
-export const redis = new Redis(env.REDIS_URL, {
-  lazyConnect: true,
-  maxRetriesPerRequest: 2
-});
+export const redis: RedisStub = {
+  connect: async () => undefined,
+  quit: async () => undefined
+};
