@@ -8,17 +8,27 @@ export type AuthTokenPayload = {
 };
 
 export function signAccessToken(payload: AuthTokenPayload): string {
-  return jwt.sign(payload, env.JWT_ACCESS_SECRET, { expiresIn: env.JWT_ACCESS_TTL });
+  // Fix 1: Type assertion for secret
+  const secret = env.JWT_ACCESS_SECRET as string;
+  // Fix 2: Type assertion for options
+  const options = { expiresIn: env.JWT_ACCESS_TTL } as jwt.SignOptions;
+  
+  return jwt.sign(payload, secret, options);
 }
 
 export function signRefreshToken(payload: AuthTokenPayload): string {
-  return jwt.sign(payload, env.JWT_REFRESH_SECRET, { expiresIn: env.JWT_REFRESH_TTL });
+  const secret = env.JWT_REFRESH_SECRET as string;
+  const options = { expiresIn: env.JWT_REFRESH_TTL } as jwt.SignOptions;
+  
+  return jwt.sign(payload, secret, options);
 }
 
 export function verifyAccessToken(token: string): AuthTokenPayload {
-  return jwt.verify(token, env.JWT_ACCESS_SECRET) as AuthTokenPayload;
+  const secret = env.JWT_ACCESS_SECRET as string;
+  return jwt.verify(token, secret) as AuthTokenPayload;
 }
 
 export function verifyRefreshToken(token: string): AuthTokenPayload {
-  return jwt.verify(token, env.JWT_REFRESH_SECRET) as AuthTokenPayload;
+  const secret = env.JWT_REFRESH_SECRET as string;
+  return jwt.verify(token, secret) as AuthTokenPayload;
 }
