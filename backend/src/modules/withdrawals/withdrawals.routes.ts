@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { LedgerEntry, Prisma } from "@prisma/client";
 import { z } from "zod";
 import { AuthenticatedRequest, requireAuth, requireRole } from "../../common/middleware/auth.js";
 import { prisma } from "../../config/prisma.js";
@@ -20,7 +21,7 @@ withdrawalsRouter.post("/", requireAuth, requireRole("creator"), validate(reques
   try {
     const creatorId = req.auth!.creatorId!;
     const entries = await prisma.ledgerEntry.findMany({ where: { creatorId } });
-    const balance = entries.reduce((acc, entry) => {
+    const balance = entries.reduce((acc: number, entry: LedgerEntry) => {
       const amount = Number(entry.amount);
       return entry.type === "CREDIT" ? acc + amount : acc - amount;
     }, 0);
@@ -29,7 +30,7 @@ withdrawalsRouter.post("/", requireAuth, requireRole("creator"), validate(reques
       throw new AppError("Insufficient balance", 400);
     }
 
-    const withdrawal = await prisma.$transaction(async (tx) => {
+    const withdrawal = await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
       const created = await tx.withdrawal.create({
         data: {
           creatorId,

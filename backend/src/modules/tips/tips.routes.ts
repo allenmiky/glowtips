@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { prisma } from "../../config/prisma.js";
 import { antiSpamFilter } from "../../common/middleware/anti-spam.js";
@@ -53,7 +54,7 @@ async function confirmTip(tipId: string, providerRef: string): Promise<{ tipId: 
     return { tipId, alreadyConfirmed: true };
   }
 
-  await prisma.$transaction(async (tx) => {
+  await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
     await tx.tip.update({ where: { id: tipId }, data: { status: "CONFIRMED" } });
     await tx.transaction.upsert({
       where: { tipId },

@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import { Router } from "express";
+import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { prisma } from "../../config/prisma.js";
 import { validate } from "../../common/middleware/validate.js";
@@ -188,7 +189,7 @@ authRouter.post("/reset-password", validate(resetPasswordSchema), async (req, re
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
-    await prisma.$transaction(async (tx) => {
+    await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
       await tx.user.update({
         where: { id: resetToken.userId },
         data: { passwordHash }
